@@ -15,7 +15,9 @@ struct EventCardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let imageName = event.imageName, let image = UIImage(named: imageName) {
+            if let imageName = event.imageName {
+                let imagePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
+                if let imageData = try? Data(contentsOf: imagePath), let image = UIImage(data: imageData) {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -25,6 +27,10 @@ struct EventCardView: View {
                     Color.gray
                         .frame(height: 200)
                 }
+            } else {
+                Color.gray
+                    .frame(height: 200)
+            }
             
             Text(event.name ?? "")
                 .font(.title)

@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateEventView: View {
     
     @EnvironmentObject var eventViewmodel: EventViewModel
+    @State var isNavigate: Bool = false
     @State private var eventName = ""
     @State private var eventLocation = ""
     @State private var eventDetails = ""
@@ -55,18 +56,24 @@ struct CreateEventView: View {
                             ImagePickerView(image: $eventImage)
                         }
                     }
-                    NavigationLink(destination: HomeView()) {
-                        Text("Save Event")
-                    }
-                    .onTapGesture {
+
+                    Button {
+                        print("Tapped")
+                        isNavigate = true
                         eventViewmodel.addEvent(name: eventName, location: eventLocation, details: eventDetails, organizer: eventOrganizer, date: eventDate, image: eventImage)
-                        eventName = ""
-                        eventLocation = ""
-                        eventDetails = ""
-                        eventOrganizer = ""
-                        eventDate = Date()
-                        eventImage = nil
+                        
+                        
+                    } label: {
+                        Text("Save event")
                     }
+                    
+                    if isNavigate {
+                        NavigationLink(destination: HomeView(), isActive: self.$isNavigate) {
+                            EmptyView()
+                        }
+                        .hidden()
+                    }
+
                 }
             }
         }

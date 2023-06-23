@@ -38,6 +38,13 @@ class EventViewModel: ObservableObject {
             eventEntities = try container.viewContext.fetch(request)
             print("amount of events")
             print(eventEntities.count)
+            for event in eventEntities {
+                if let imageName = event.imageName {
+                    print("Image name: \(imageName)")
+                } else {
+                    print("No image name available")
+                }
+            }
         }
         catch let error {
             print("Error fetching \(error)")
@@ -49,13 +56,13 @@ class EventViewModel: ObservableObject {
         print("Start adding")
         
         var imageName: String?
-
+            
         if let image = image {
             guard let imageData = image.jpegData(compressionQuality: 0.8) else {
                 return
             }
             
-            let imageFileName = UUID().uuidString
+            let imageFileName = UUID().uuidString + ".jpg" // Add file extension
             let imagePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageFileName)
             
             do {
@@ -65,6 +72,7 @@ class EventViewModel: ObservableObject {
                 print("Failed to save image: \(error)")
             }
         }
+            
         
         
         let context = container.viewContext
