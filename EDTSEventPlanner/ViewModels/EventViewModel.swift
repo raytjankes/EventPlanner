@@ -14,6 +14,7 @@ class EventViewModel: ObservableObject {
     
     @Published var events: [Event] = []
     @Published var eventEntities : [EventEntity] = []
+    @Published var orderedEvents : [EventEntity] = []
     let container: NSPersistentContainer
     
     init() {
@@ -26,9 +27,7 @@ class EventViewModel: ObservableObject {
                 print("Successfully load Core Data")
             }
         }
-        
         fetchEvents()
-        self.events = generateDummyData()
       }
     
     private func fetchEvents() {
@@ -36,6 +35,7 @@ class EventViewModel: ObservableObject {
         
         do{
             eventEntities = try container.viewContext.fetch(request)
+            orderedEvents  = eventEntities
             print("amount of events")
             print(eventEntities.count)
             for event in eventEntities {
@@ -110,33 +110,16 @@ class EventViewModel: ObservableObject {
            print("Error deleting event: \(error)")
        }
    }
-    
-    private func generateDummyData() -> [Event] {
-        let event1 = Event(id: 1,
-                           name: "Event 1",
-                           location: "Location 1",
-                           details: "Description 1",
-                           organizer: "Organizer 1",
-                           date: Date(),
-                           imageName: nil)
-        
-        let event2 = Event(id: 2,
-                           name: "Event 2",
-                           location: "Location 2",
-                           details: "Description 2",
-                           organizer: "Organizer 2",
-                           date: Date(),
-                           imageName: nil)
-        
-        let event3 = Event(id: 3,
-                           name: "Event 3",
-                           location: "Location 3",
-                           details: "Description 3",
-                           organizer: "Organizer 3",
-                           date: Date(),
-                           imageName: nil)
-        
-        return [event1, event2, event3]
+
+    func sortEntities(option: String) {
+        switch option {
+        case "name":
+            eventEntities.sort { ($0.name ?? "") < ($1.name ?? "") }
+        case "date":
+            eventEntities.sort { ($0.date ?? Date()) < ($1.date ?? Date()) }
+        default:
+            eventEntities = orderedEvents
+        }
     }
 
 }

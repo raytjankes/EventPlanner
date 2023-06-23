@@ -19,6 +19,12 @@ struct EDTSEventPlannerApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(EventViewModel())
+                .preferredColorScheme(.light) // Force light mode
+                .environment(\.colorScheme, .light) // Optional: Set environment color scheme to light
+                .onAppear {
+                    // Optional: Override the user interface style at the app level
+                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+                }
         }
     }
 }

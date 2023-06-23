@@ -10,7 +10,9 @@ import FirebaseAuth
 
 struct HomeView: View {
     @EnvironmentObject var eventViewmodel: EventViewModel
-    
+    @State private var selectedSortIndex: Int = 0
+    var displayOptions: [String] = ["Order by Last Made","Order by Name","Order by Date"]
+    var options: [String] = ["id","name","date"]
     var body: some View {
         NavigationView {
             GeometryReader{geometry in
@@ -29,6 +31,11 @@ struct HomeView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .padding()
+                            }
+                            Spacer()
+                            
+                            PullDownView(selectedIndex: $selectedSortIndex, options: displayOptions) { index in
+                                eventViewmodel.sortEntities(option: options[index])
                             }
                         }
                         .frame(height: geometry.size.height / 10)
