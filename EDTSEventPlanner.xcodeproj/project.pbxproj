@@ -23,13 +23,16 @@
 		7D7919792A45471D0080FA7C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7D7919782A45471D0080FA7C /* FirebaseFirestore */; };
 		7D79197D2A4552710080FA7C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79197C2A4552710080FA7C /* ProfileView.swift */; };
 		7D7919802A45554F0080FA7C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79197F2A45554F0080FA7C /* HomeView.swift */; };
-		7D7919842A4557F90080FA7C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7919832A4557F90080FA7C /* Event.swift */; };
 		7D7919862A4558170080FA7C /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7919852A4558170080FA7C /* EventViewModel.swift */; };
 		7D7919882A4559460080FA7C /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7919872A4559460080FA7C /* EventCardView.swift */; };
 		7D79198B2A455FAD0080FA7C /* EventsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D7919892A455FAD0080FA7C /* EventsContainer.xcdatamodeld */; };
 		7D79198D2A45645F0080FA7C /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79198C2A45645F0080FA7C /* CreateEventView.swift */; };
 		7D79198F2A4564B20080FA7C /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79198E2A4564B20080FA7C /* ImagePickerView.swift */; };
 		7DABCDFC2A45ADAB001D58ED /* PullDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DABCDFB2A45ADAB001D58ED /* PullDownView.swift */; };
+		7DBF0B692A46954800512840 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DBF0B6B2A46954800512840 /* Localizable.strings */; };
+		7DBF0B6E2A46969200512840 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */; };
+		7DBF0B712A469D1400512840 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B702A469D1400512840 /* Language.swift */; };
+		7DBF0B732A46CD5F00512840 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B722A46CD5F00512840 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,13 +70,17 @@
 		7D7919732A4545BD0080FA7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D79197C2A4552710080FA7C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7D79197F2A45554F0080FA7C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		7D7919832A4557F90080FA7C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		7D7919852A4558170080FA7C /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		7D7919872A4559460080FA7C /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
 		7D79198A2A455FAD0080FA7C /* EventsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EventsContainer.xcdatamodel; sourceTree = "<group>"; };
 		7D79198C2A45645F0080FA7C /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		7D79198E2A4564B20080FA7C /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		7DABCDFB2A45ADAB001D58ED /* PullDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullDownView.swift; sourceTree = "<group>"; };
+		7DBF0B6A2A46954800512840 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7DBF0B6C2A46956600512840 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
+		7DBF0B702A469D1400512840 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		7DBF0B722A46CD5F00512840 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +133,8 @@
 		7D7919372A4536540080FA7C /* EDTSEventPlanner */ = {
 			isa = PBXGroup;
 			children = (
+				7DBF0B6F2A469D0700512840 /* Enum */,
+				7DBF0B662A4694F300512840 /* Accesibility */,
 				7D7919732A4545BD0080FA7C /* GoogleService-Info.plist */,
 				7D79196C2A453C3B0080FA7C /* Extensions */,
 				7D7919692A45380F0080FA7C /* Views */,
@@ -167,7 +176,6 @@
 		7D7919622A4536640080FA7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7D7919832A4557F90080FA7C /* Event.swift */,
 				7D7919892A455FAD0080FA7C /* EventsContainer.xcdatamodeld */,
 			);
 			path = Models;
@@ -177,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				7D7919852A4558170080FA7C /* EventViewModel.swift */,
+				7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -199,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				7D79196D2A453C4D0080FA7C /* String.swift */,
+				7DBF0B722A46CD5F00512840 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -211,6 +221,22 @@
 				7DABCDFB2A45ADAB001D58ED /* PullDownView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		7DBF0B662A4694F300512840 /* Accesibility */ = {
+			isa = PBXGroup;
+			children = (
+				7DBF0B6B2A46954800512840 /* Localizable.strings */,
+			);
+			path = Accesibility;
+			sourceTree = "<group>";
+		};
+		7DBF0B6F2A469D0700512840 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				7DBF0B702A469D1400512840 /* Language.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +329,7 @@
 			knownRegions = (
 				en,
 				Base,
+				id,
 			);
 			mainGroup = 7D79192C2A4536540080FA7C;
 			packageReferences = (
@@ -325,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D7919402A4536560080FA7C /* Preview Assets.xcassets in Resources */,
+				7DBF0B692A46954800512840 /* Localizable.strings in Resources */,
 				7D79193D2A4536560080FA7C /* Assets.xcassets in Resources */,
 				7D7919742A4545BD0080FA7C /* GoogleService-Info.plist in Resources */,
 			);
@@ -353,11 +381,12 @@
 			files = (
 				7D7919802A45554F0080FA7C /* HomeView.swift in Sources */,
 				7D79197D2A4552710080FA7C /* ProfileView.swift in Sources */,
+				7DBF0B6E2A46969200512840 /* LanguageViewModel.swift in Sources */,
 				7D79196B2A4538420080FA7C /* LoginView.swift in Sources */,
 				7D7919862A4558170080FA7C /* EventViewModel.swift in Sources */,
 				7D79198F2A4564B20080FA7C /* ImagePickerView.swift in Sources */,
 				7D7919702A45400F0080FA7C /* RegisterView.swift in Sources */,
-				7D7919842A4557F90080FA7C /* Event.swift in Sources */,
+				7DBF0B712A469D1400512840 /* Language.swift in Sources */,
 				7D79198D2A45645F0080FA7C /* CreateEventView.swift in Sources */,
 				7D7919882A4559460080FA7C /* EventCardView.swift in Sources */,
 				7D7919722A4540BB0080FA7C /* AuthView.swift in Sources */,
@@ -366,6 +395,7 @@
 				7DABCDFC2A45ADAB001D58ED /* PullDownView.swift in Sources */,
 				7D79196E2A453C4D0080FA7C /* String.swift in Sources */,
 				7D7919392A4536540080FA7C /* EDTSEventPlannerApp.swift in Sources */,
+				7DBF0B732A46CD5F00512840 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +430,18 @@
 			targetProxy = 7D7919502A4536560080FA7C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7DBF0B6B2A46954800512840 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7DBF0B6A2A46954800512840 /* en */,
+				7DBF0B6C2A46956600512840 /* id */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7D7919572A4536560080FA7C /* Debug */ = {

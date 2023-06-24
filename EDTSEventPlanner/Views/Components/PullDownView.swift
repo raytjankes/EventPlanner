@@ -24,7 +24,11 @@ struct PullDownView: View {
             }
 
             } label: {
-                 Image(systemName: "ellipsis.circle").imageScale(.large)
+                 Image(systemName: "ellipsis.circle")
+                    .font(.system(size: 40))
+                    .padding()
+                    .foregroundColor(Color.customPrimary)
+                    .padding(.bottom)
             }
     }
 }

@@ -1,0 +1,10 @@
+//
+//  Localizable.strings
+//  EDTSEventPlanner
+//
+//  Created by Ray on 24/06/23.
+//
+
+"login_header" = "Login now";
+"register_header" = "Sign up Now";
+"welcome_message" = "Welcome!";

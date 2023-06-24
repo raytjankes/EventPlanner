@@ -11,8 +11,6 @@ import CoreData
 
 class EventViewModel: ObservableObject {
     
-    
-    @Published var events: [Event] = []
     @Published var eventEntities : [EventEntity] = []
     @Published var orderedEvents : [EventEntity] = []
     let container: NSPersistentContainer

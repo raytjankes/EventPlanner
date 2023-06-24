@@ -12,11 +12,9 @@ struct AuthView: View {
     var body: some View {
         if (currentViewShowing == "login"){
             LoginView(currentViewShowing: $currentViewShowing)
-                .preferredColorScheme(.light)
                 .transition(.opacity)
         } else{
             RegisterView(currentViewShowing: $currentViewShowing)
-                .preferredColorScheme(.dark)
                 .transition(.move(edge: .bottom))
         }
     }
@@ -25,5 +23,6 @@ struct AuthView: View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         AuthView()
+            .environmentObject(LanguageViewModel())
     }
 }
