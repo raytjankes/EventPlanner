@@ -22,6 +22,7 @@
 "label_home_sort_by_made" = "Urut dari buatnya";
 "label_home_sort_by_name" = "Urut dari nama";
 "label_home_sort_by_date" = "Urut dari tanggal";
+"label_home_empty_event" = "Belum ada rencana";
 
 // MARK: ProfileView
 "title_profile_header" = "Profil";

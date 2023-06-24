@@ -46,14 +46,26 @@ struct HomeView: View {
                         .frame(height: geometry.size.height / 10)
                         .background(Color.customBackground)
                         
-                        ScrollView {
-                            LazyVStack(spacing: 16) {
-                                ForEach(eventViewmodel.eventEntities, id: \.id) { eventEntity in
-                                    EventCardView(event: eventEntity)
+                            if(eventViewmodel.eventEntities.count != 0){
+                                ScrollView {
+
+                                LazyVStack(spacing: 16) {
+                                    
+                                    ForEach(eventViewmodel.eventEntities, id: \.id) { eventEntity in
+                                        EventCardView(event: eventEntity)
+                                    }
                                 }
+                                .padding()
                             }
-                            .padding()
-                        }
+                            }
+                            else{
+                                Spacer()
+                                Text("label_home_empty_event".localized(language.getLanguage()))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.customSecondary)
+                                Spacer()
+                            }
+                        
                         
                     }
                     VStack{

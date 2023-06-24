@@ -23,6 +23,7 @@
 "label_home_sort_by_made" = "Order by first made";
 "label_home_sort_by_name" = "Order by name";
 "label_home_sort_by_date" = "Order by date";
+"label_home_empty_event" = "No events yet";
 
 // MARK: ProfileView
 "title_profile_header" = "Profile";
