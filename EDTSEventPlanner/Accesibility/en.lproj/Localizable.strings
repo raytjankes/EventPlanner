@@ -5,6 +5,41 @@
 //  Created by Ray on 24/06/23.
 //
 
-"login_header" = "Login now";
-"register_header" = "Sign up Now";
-"welcome_message" = "Welcome!";
+
+// MARK: LoginView
+"label_email" = "Email address";
+"label_password" = "Password";
+"label_login_redirect_register" = "Don't have an account?";
+"button_login_redirect_register" = "Sign up";
+"button_login_redirect_home" = "Login";
+
+// MARK: RegisterView
+"label_register_redirect_login" = "Have an account?";
+"button_register_redirect_login" = "Log in";
+"button_register_redirect_home" = "Register";
+
+// MARK: HomeView
+"title_home_header" = "Your Plans";
+"label_home_sort_by_made" = "Order by first made";
+"label_home_sort_by_name" = "Order by name";
+"label_home_sort_by_date" = "Order by date";
+
+// MARK: ProfileView
+"title_profile_header" = "Profile";
+"button_profile_logout" = "Logout";
+
+// MARK: CreateEventView
+"title_create_event_header" = "Create Event";
+"label_name" = "Name";
+"label_location" = "Location";
+"label_details" = "Description";
+"label_organizer" = "Organizer";
+"label_date" = "Date";
+"label_image" = "Image";
+"label_create_event_date" = "Selected date";
+"label_create_event_image" = "Select image";
+"button_create_event_create" = "Save Event";
+
+// MARK: EventCardView
+"label_card_at" = "at";
+"label_card_by" = "by";

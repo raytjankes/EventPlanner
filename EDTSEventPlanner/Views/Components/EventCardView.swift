@@ -9,72 +9,80 @@ import Foundation
 import SwiftUI
 
 struct EventCardView: View {
-    
+    @EnvironmentObject var language: LanguageViewModel
     @EnvironmentObject var eventViewModel: EventViewModel
     let event: EventEntity
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if let imageName = event.imageName {
-                let imagePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
-                if let imageData = try? Data(contentsOf: imagePath), let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 200)
-                        .clipped()
+        ZStack{
+            VStack(alignment: .leading) {
+                if let imageName = event.imageName {
+                    let imagePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
+                    if let imageData = try? Data(contentsOf: imagePath), let image = UIImage(data: imageData) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 200)
+                            .clipped()
+                    } else {
+                        Color.gray
+                            .frame(height: 200)
+                    }
                 } else {
                     Color.gray
                         .frame(height: 200)
                 }
-            } else {
-                Color.gray
-                    .frame(height: 200)
+                
+                Text(event.name ?? "")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.top, 10)
+                
+                Text("label_card_at".localized(language.getLanguage()) + " " + (event.location ?? ""))
+                    .foregroundColor(.secondary)
+                
+                Text(event.details ?? "")
+                    .font(.body)
+                    .padding(.top, 5)
+                
+                Text("label_card_by".localized(language.getLanguage()) + " " + (event.organizer ?? ""))
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 5)
+                
+                Text(dateFormatter.string(from: event.date ?? Date()))
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 5)
             }
-            
-            Text(event.name ?? "")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.top, 10)
-            
-            Text(event.location ?? "")
-                .foregroundColor(.secondary)
-            
-            Text(event.details ?? "")
-                .font(.body)
-                .padding(.top, 5)
-            
-            Text(event.organizer ?? "")
-                .font(.caption)
-                .foregroundColor(.gray)
-                .padding(.top, 5)
-            
-            Text(dateFormatter.string(from: event.date ?? Date()))
-                .font(.caption)
-                .foregroundColor(.gray)
-                .padding(.top, 5)
-            Button(action: {
-                eventViewModel.deleteEvent(event)
-            }) {
-                Text("Delete")
-                    .foregroundColor(.red)
-                    .padding(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.red, lineWidth: 1)
-                    )
+            VStack {
+                Spacer()
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        eventViewModel.deleteEvent(event)
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                            .padding(8)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.red, lineWidth: 1)
+                            )
+                    }
+                }
             }
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+        .shadow(color: Color.customDarkBackground, radius: 5, x: 0, y: 2)
     }
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .short
+        formatter.timeStyle = .none
         return formatter
     }()
 }

@@ -9,9 +9,10 @@ import SwiftUI
 import FirebaseAuth
 
 struct HomeView: View {
+    @EnvironmentObject var language: LanguageViewModel
     @EnvironmentObject var eventViewmodel: EventViewModel
     @State private var selectedSortIndex: Int = 0
-    var displayOptions: [String] = ["Order by Last Made","Order by Name","Order by Date"]
+    var displayOptions: [String] = ["label_home_sort_by_made","label_home_sort_by_name","label_home_sort_by_date"]
     var options: [String] = ["id","name","date"]
     
     var body: some View {
@@ -24,18 +25,16 @@ struct HomeView: View {
                             NavigationLink(destination: ProfileView()) {
                                 Image(systemName: "person.circle.fill")
                                     .font(.system(size: 40))
-                                    .padding()
                                     .foregroundColor(Color.customPrimary)
-                                    .padding(.bottom)
 
                             }
                             Spacer()
                             
-                            Text("Your Plans")
+                            Text("title_home_header".localized(language.getLanguage()))
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.customPrimary)
-                                .padding(.bottom)
+                                .padding(.horizontal)
                             
                             Spacer()
                             
@@ -43,6 +42,7 @@ struct HomeView: View {
                                 eventViewmodel.sortEntities(option: options[index])
                             }
                         }
+                        .padding()
                         .frame(height: geometry.size.height / 10)
                         .background(Color.customBackground)
                         
@@ -74,6 +74,7 @@ struct HomeView: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
                                         .foregroundColor(Color.customButton)
+                                        .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 1)
 
                                 )
                                 
@@ -94,5 +95,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(EventViewModel())
+            .environmentObject(LanguageViewModel())
+            .environmentObject(AuthViewModel())
     }
 }

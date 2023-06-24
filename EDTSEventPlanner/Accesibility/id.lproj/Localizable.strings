@@ -5,6 +5,41 @@
 //  Created by Ray on 24/06/23.
 //
 
-"login_header" = "Login Sekarang";
-"register_header" = "Bikin Akun Sekarang";
-"welcome_message" = "Selamat datang!";
+// MARK: LoginView
+"label_email" = "Alamat email";
+"label_password" = "Kata sandi";
+"label_login_redirect_register" = "Tidak punya akun?";
+"button_login_redirect_register" = "Daftar disini";
+"button_login_redirect_home" = "Masuk";
+
+// MARK: RegisterView
+"label_register_redirect_login" = "Sudah punya akun?";
+"button_register_redirect_login" = "Log in";
+"button_register_redirect_home" = "Bikin Akun";
+
+// MARK: HomeView
+"title_home_header" = "Rencana Anda";
+"label_home_sort_by_made" = "Urut dari buatnya";
+"label_home_sort_by_name" = "Urut dari nama";
+"label_home_sort_by_date" = "Urut dari tanggal";
+
+// MARK: ProfileView
+"title_profile_header" = "Profil";
+"button_profile_logout" = "Keluar Akun";
+
+// MARK: CreateEventView
+"title_create_event_header" = "Buat Rencana";
+"label_name" = "Nama";
+"label_location" = "Lokasi";
+"label_details" = "Deskripsi";
+"label_organizer" = "Penyelenggara";
+"label_date" = "Tanggal";
+"label_image" = "Gambar";
+"label_create_event_date" = "Tanggal terpilih";
+"label_create_event_image" = "Pilih gambar";
+"button_create_event_create" = "Simpan Rencana";
+
+// MARK: EventCardView
+"label_card_at" = "di";
+"label_card_by" = "oleh";
+

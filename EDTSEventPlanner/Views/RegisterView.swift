@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct RegisterView: View {
-    
+    @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var language: LanguageViewModel
     @AppStorage("uid") var userID: String = ""
     @Binding var currentViewShowing: String
@@ -33,7 +33,7 @@ struct RegisterView: View {
                             .frame(height: geometry.size.height / 20)
                         VStack{
                             HStack{
-                                Text("Email Address:")
+                                Text("label_email".localized(language.getLanguage()) + ":")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.customPrimary)
                                 Spacer()
@@ -42,7 +42,7 @@ struct RegisterView: View {
                             .padding(.horizontal)
                             HStack{
                                 Image(systemName: "mail")
-                                TextField("Email", text: $email)
+                                TextField("label_email".localized(language.getLanguage()), text: $email)
                                 
                                 Spacer()
                                 
@@ -68,7 +68,7 @@ struct RegisterView: View {
                         Spacer().frame(height: geometry.size.height / 30)
                         VStack{
                             HStack{
-                                Text("Password:")
+                                Text("label_password".localized(language.getLanguage()) + ":")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.customPrimary)
                                 Spacer()
@@ -77,7 +77,7 @@ struct RegisterView: View {
                             .padding(.horizontal)
                             HStack{
                                 Image(systemName: "key")
-                                SecureField("Password", text: $password)
+                                SecureField("label_password".localized(language.getLanguage()), text: $password)
                                 
                                 Spacer()
                                 
@@ -104,7 +104,8 @@ struct RegisterView: View {
                         }
                         
                         HStack{
-                            Text("Already have an account?")
+                            Text("label_register_redirect_login".localized(language.getLanguage()))
+                                .foregroundColor(Color.customPrimary)
                                 .opacity(0.7)
                             Button {
                                 withAnimation {
@@ -112,7 +113,7 @@ struct RegisterView: View {
                                 }
                                 
                             } label: {
-                                Text("Log in")
+                                Text("button_register_redirect_login".localized(language.getLanguage()))
                                     .foregroundColor(Color.customButton)
                             }
                         }
@@ -121,21 +122,18 @@ struct RegisterView: View {
                         Spacer()
                         
                         Button {
-                            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                                
-                                if let error = error {
-                                    print( error)
-                                    return
-                                }
-                                if let authResult = authResult {
-                                    print(authResult.user.uid)
-                                    userID = authResult.user.uid
-                                    isNavigate = true
+                            authViewModel.registerEmailPassword(email: email, password: password) { userID in
+                                DispatchQueue.main.async {
+                                    if !userID.isEmpty {
+                                        self.userID = userID
+                                        isNavigate = true
+                                        print("Moving page")
+                                    }
                                 }
                             }
                             
                         } label: {
-                            Text("Register")
+                            Text("button_register_redirect_home".localized(language.getLanguage()))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
@@ -188,7 +186,6 @@ struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView(currentViewShowing: $currentViewShowing)
             .environmentObject(LanguageViewModel())
-            .preferredColorScheme(.dark)
-        
+            .environmentObject(AuthViewModel())
     }
 }

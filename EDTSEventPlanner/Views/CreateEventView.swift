@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateEventView: View {
-    
+    @EnvironmentObject var language: LanguageViewModel
     @EnvironmentObject var eventViewmodel: EventViewModel
     @State var isNavigate: Bool = false
     @State private var eventName = ""
@@ -41,7 +41,7 @@ struct CreateEventView: View {
                     VStack{
                         HStack{
                             Spacer()
-                            Text("Create Event")
+                            Text("title_create_event_header".localized(language.getLanguage()))
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.customPrimary)
@@ -49,8 +49,8 @@ struct CreateEventView: View {
                             Spacer()
                         }
                         List {
-                            Section(header: Text("Name")) {
-                                TextField("Name", text: $eventName)
+                            Section(header: Text("label_name".localized(language.getLanguage()) + "*")) {
+                                TextField("label_name".localized(language.getLanguage()), text: $eventName)
                             }
                             .listRowInsets(EdgeInsets(top: 15, leading: 10, bottom: 5, trailing: 10))
                             .listRowBackground(
@@ -59,8 +59,8 @@ struct CreateEventView: View {
                                     .background(Color.customPrimary)
                             )
 
-                            Section(header: Text("Location")) {
-                                TextField("Location", text: $eventLocation)
+                            Section(header: Text("label_location".localized(language.getLanguage()) + "*")) {
+                                TextField("label_location".localized(language.getLanguage()), text: $eventLocation)
                             }
                             .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                             .listRowBackground(
@@ -69,8 +69,8 @@ struct CreateEventView: View {
                                     .background(Color.customPrimary)
                             )
                             
-                            Section(header: Text("Description")) {
-                                TextField("Details", text: $eventDetails)
+                            Section(header: Text("label_details".localized(language.getLanguage()))) {
+                                TextField("label_details".localized(language.getLanguage()), text: $eventDetails)
                             }
                             .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                             .listRowBackground(
@@ -79,8 +79,8 @@ struct CreateEventView: View {
                                     .background(Color.customPrimary)
                             )
                             
-                            Section(header: Text("Organizer")) {
-                                TextField("Organizer", text: $eventOrganizer)
+                            Section(header: Text("label_organizer".localized(language.getLanguage()) + "*")) {
+                                TextField("label_organizer".localized(language.getLanguage()), text: $eventOrganizer)
                             }
                             .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                             .listRowBackground(
@@ -89,8 +89,8 @@ struct CreateEventView: View {
                                     .background(Color.customPrimary)
                             )
                             
-                            Section(header: Text("Date")) {
-                                DatePicker("Selected date", selection: $eventDate, displayedComponents: [.date])
+                            Section(header: Text("label_date".localized(language.getLanguage()) + "*")) {
+                                DatePicker("label_create_event_date".localized(language.getLanguage()), selection: $eventDate, displayedComponents: [.date])
                             }
                             .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                             .listRowBackground(
@@ -99,21 +99,36 @@ struct CreateEventView: View {
                                     .background(Color.customPrimary)
                             )
                             
-                            Section(header: Text("Image")) {
-                                if let image = eventImage {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                }
+                            Section(header: Text("label_image".localized(language.getLanguage()))) {
+                                VStack{
                                     
-                                
-                                Button(action: {
-                                    isShowingImagePicker = true
-                                }) {
-                                    Text("Select Image")
-                                }
-                                .sheet(isPresented: $isShowingImagePicker) {
-                                    ImagePickerView(image: $eventImage)
+                                    if let image = eventImage {
+                                        Button(action: {
+                                            isShowingImagePicker = true
+                                        }) {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .scaledToFit()
+                                        }
+                                        .sheet(isPresented: $isShowingImagePicker) {
+                                            ImagePickerView(image: $eventImage)
+                                        }
+                                        
+                                    }
+                                    else{
+                                        HStack{
+                                            Button(action: {
+                                                isShowingImagePicker = true
+                                            }) {
+                                                Text("label_create_event_image".localized(language.getLanguage()))
+                                            }
+                                            .sheet(isPresented: $isShowingImagePicker) {
+                                                ImagePickerView(image: $eventImage)
+                                            }
+                                            Spacer()
+                                        }
+                                    }
+                                    
                                 }
                             }
                             .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
@@ -126,13 +141,12 @@ struct CreateEventView: View {
 
                         
                         Button {
-                            print("Tapped")
                             isNavigate = true
                             eventViewmodel.addEvent(name: eventName, location: eventLocation, details: eventDetails, organizer: eventOrganizer, date: eventDate, image: eventImage)
                             
                             
                         } label: {
-                            Text("Save event")
+                            Text("button_create_event_create".localized(language.getLanguage()))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
@@ -166,5 +180,6 @@ struct CreateEventView_Previews: PreviewProvider {
     static var previews: some View {
         CreateEventView()
             .environmentObject(EventViewModel())
+            .environmentObject(LanguageViewModel())
     }
 }

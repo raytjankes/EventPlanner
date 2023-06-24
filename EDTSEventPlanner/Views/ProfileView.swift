@@ -11,6 +11,8 @@ import FirebaseAuth
 struct ProfileView: View {
     
     @AppStorage("uid") var userID: String = ""
+    @EnvironmentObject var language: LanguageViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         NavigationView{
@@ -33,7 +35,7 @@ struct ProfileView: View {
                     VStack{
                         HStack{
                             Spacer()
-                            Text("Profile")
+                            Text("title_profile_header".localized(language.getLanguage()))
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
                                 .foregroundColor(Color.customPrimary)
@@ -48,26 +50,37 @@ struct ProfileView: View {
                         
                         Spacer().frame(height: geometry.size.height / 25)
                         
-                        Text(Auth.auth().currentUser?.email ?? "Stranger")
+                        Text(authViewModel.getCurrentUserEmail() ?? "Stranger")
                             .font(.system(size: 20))
                             .fontWeight(.bold)
                             .foregroundColor(Color.customDarkBackground)
                         
                         Spacer().frame(height: geometry.size.height / 10)
+                        Button(action: {
+                            // Change the language
+                            language.toggleLanguage()
+                        }) {
+                            Text(language.getLanguage().rawValue)
+                                .padding()
+                                .fontWeight(.bold)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .foregroundColor(Color.customButton)
+                                        .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
+                                )
+                                .foregroundColor(Color.customPrimary)
+                        }
+                        Spacer().frame(height: geometry.size.height / 10)
                         HStack{
                             Spacer()
                             Button {
-                                let firebaseAuth = Auth.auth()
-                                do {
-                                    try firebaseAuth.signOut()
-                                    withAnimation{
+                                authViewModel.logout { message in
+                                    if message == "Success"{
                                         userID = ""
                                     }
-                                } catch let signOutError as NSError {
-                                    print("Error signing out: %@", signOutError)
                                 }
                             } label: {
-                                Text("Log Out")
+                                Text("button_profile_logout".localized(language.getLanguage()))
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
                                     .frame(maxWidth: .infinity)
@@ -97,5 +110,6 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
             .environmentObject(LanguageViewModel())
+            .environmentObject(AuthViewModel())
     }
 }

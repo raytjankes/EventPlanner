@@ -33,6 +33,7 @@
 		7DBF0B6E2A46969200512840 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */; };
 		7DBF0B712A469D1400512840 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B702A469D1400512840 /* Language.swift */; };
 		7DBF0B732A46CD5F00512840 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B722A46CD5F00512840 /* Color.swift */; };
+		7DBF0B772A4744A300512840 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B762A4744A300512840 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		7DBF0B702A469D1400512840 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		7DBF0B722A46CD5F00512840 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7DBF0B762A4744A300512840 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			children = (
 				7D7919852A4558170080FA7C /* EventViewModel.swift */,
 				7DBF0B6D2A46969200512840 /* LanguageViewModel.swift */,
+				7DBF0B762A4744A300512840 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				7D79198F2A4564B20080FA7C /* ImagePickerView.swift in Sources */,
 				7D7919702A45400F0080FA7C /* RegisterView.swift in Sources */,
 				7DBF0B712A469D1400512840 /* Language.swift in Sources */,
+				7DBF0B772A4744A300512840 /* AuthViewModel.swift in Sources */,
 				7D79198D2A45645F0080FA7C /* CreateEventView.swift in Sources */,
 				7D7919882A4559460080FA7C /* EventCardView.swift in Sources */,
 				7D7919722A4540BB0080FA7C /* AuthView.swift in Sources */,

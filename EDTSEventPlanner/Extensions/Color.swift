@@ -16,6 +16,8 @@ extension Color {
     static let customDarkBackground = Color(hex: "0x060D21")
     static let customButton = Color(hex: "0xE71D4D")
     
+    
+    // Function to convert hexcode to Color
     init(hex: String) {
         let scanner = Scanner(string: hex)
         var rgbValue: UInt64 = 0

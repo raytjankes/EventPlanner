@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct LoginView: View {
     @EnvironmentObject var language: LanguageViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @AppStorage("uid") var userID: String = ""
     @Binding var currentViewShowing: String
     @State private var email: String = ""
@@ -22,12 +23,6 @@ struct LoginView: View {
                 ZStack{
                     VStack{
                         HStack{
-                            //                            Text("welcome_message".localized(language.getLanguage()))
-                            //                                .font(.largeTitle)
-                            //                                .padding()
-                            //                                .bold()
-                            //                                .accessibility(label: Text("welcome_message".localized(language.getLanguage())))
-                            
                             Spacer()
                             
                             Button(action: {
@@ -59,7 +54,7 @@ struct LoginView: View {
                             .frame(height: geometry.size.height / 20)
                         VStack{
                             HStack{
-                                Text("Email Address:")
+                                Text("label_email".localized(language.getLanguage()) +  ":")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.customPrimary)
                                 Spacer()
@@ -68,7 +63,7 @@ struct LoginView: View {
                             .padding(.horizontal)
                             HStack{
                                 Image(systemName: "mail")
-                                TextField("Email Address", text: $email)
+                                TextField("label_email".localized(language.getLanguage()), text: $email)
                                 
                                 Spacer()
                                 
@@ -94,7 +89,7 @@ struct LoginView: View {
                         Spacer().frame(height: geometry.size.height / 30)
                         VStack{
                             HStack{
-                                Text("Password:")
+                                Text("label_password".localized(language.getLanguage())+":")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.customPrimary)
                                 Spacer()
@@ -103,7 +98,7 @@ struct LoginView: View {
                             .padding(.horizontal)
                             HStack{
                                 Image(systemName: "key")
-                                SecureField("Password", text: $password)
+                                SecureField("label_password".localized(language.getLanguage()), text: $password)
                                 
                                 Spacer()
                                 
@@ -131,14 +126,14 @@ struct LoginView: View {
                         
                         
                         HStack{
-                            Text("Don't have an account?")
+                            Text("label_login_redirect_register".localized(language.getLanguage()))
                                 .foregroundColor(Color.customPrimary.opacity(0.7))
                             Button {
                                 withAnimation {
                                     self.currentViewShowing = "register"
                                 }
                             } label: {
-                                Text("Sign up")
+                                Text("button_login_redirect_register".localized(language.getLanguage()))
                                     .foregroundColor(Color.customButton)
                             }
                         }
@@ -147,19 +142,18 @@ struct LoginView: View {
                         Spacer()
                         
                         Button {
-                            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                                if let error = error{
-                                    print(error)
-                                }
-                                
-                                if let authResult = authResult {
-                                    print(authResult.user.uid)
-                                    userID = authResult.user.uid
-                                    isNavigate = true
+                            authViewModel.login(email: email, password: password) { userID in
+                                DispatchQueue.main.async {
+                                    if !userID.isEmpty {
+                                        self.userID = userID
+                                        isNavigate = true
+                                        print("Moving page")
+                                    }
                                 }
                             }
+
                         } label: {
-                            Text("Log in")
+                            Text("button_login_redirect_home".localized(language.getLanguage()))
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
@@ -191,7 +185,7 @@ struct LoginView_Previews: PreviewProvider {
     
     static var previews: some View {
         LoginView(currentViewShowing: $currentViewShowing)
-            .preferredColorScheme(.light)
             .environmentObject(LanguageViewModel())
+            .environmentObject(AuthViewModel())
     }
 }

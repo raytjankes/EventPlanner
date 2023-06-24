@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct PullDownView: View {
+    @EnvironmentObject var language: LanguageViewModel
     @Binding var selectedIndex: Int
     let options: [String]
+    
+    // Custom action depending on the choice picked
     let optionSelected: (Int) -> Void
     
     var body: some View {
@@ -19,16 +22,14 @@ struct PullDownView: View {
                     selectedIndex = index
                     optionSelected(selectedIndex)
                 }) {
-                    Text(options[index])
+                    Text(options[index].localized(language.getLanguage()))
                 }.frame(maxWidth: .infinity)
             }
 
             } label: {
                  Image(systemName: "ellipsis.circle")
                     .font(.system(size: 40))
-                    .padding()
                     .foregroundColor(Color.customPrimary)
-                    .padding(.bottom)
             }
     }
 }
@@ -38,9 +39,9 @@ struct PullDownView_Previews: PreviewProvider {
 
     static var previews: some View {
         PullDownView(selectedIndex: $selectedIndex, options: ["one", "two", "three"]) { option in
-            // Custom action to be performed when an option is selected
             print("Selected option: \(option)")
         }
+        .environmentObject(LanguageViewModel())
     }
 }
 

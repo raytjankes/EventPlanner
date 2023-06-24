@@ -20,10 +20,11 @@ struct EDTSEventPlannerApp: App {
             ContentView()
                 .environmentObject(EventViewModel())
                 .environmentObject(LanguageViewModel())
-                .preferredColorScheme(.light) // Force light mode
-                .environment(\.colorScheme, .light) // Optional: Set environment color scheme to light
+                .environmentObject(AuthViewModel())
+                // Force light mode
+                .preferredColorScheme(.light)
+                .environment(\.colorScheme, .light)
                 .onAppear {
-                    // Optional: Override the user interface style at the app level
                     UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
                 }
         }
