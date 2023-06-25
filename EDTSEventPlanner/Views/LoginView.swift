@@ -138,6 +138,7 @@ struct LoginView: View {
                             Button {
                                 withAnimation {
                                     self.currentViewShowing = "register"
+                                    authViewModel.errorMessage = ""
                                 }
                             } label: {
                                 Text("button_login_redirect_register".localized(language.getLanguage()))

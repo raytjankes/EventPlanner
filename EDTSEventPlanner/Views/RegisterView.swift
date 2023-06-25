@@ -130,6 +130,7 @@ struct RegisterView: View {
                             Button {
                                 withAnimation {
                                     self.currentViewShowing = "login"
+                                    authViewModel.errorMessage = ""
                                 }
                                 
                             } label: {

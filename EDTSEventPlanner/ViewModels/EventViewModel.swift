@@ -36,13 +36,6 @@ class EventViewModel: ObservableObject {
             orderedEvents  = eventEntities
             print("amount of events")
             print(eventEntities.count)
-            for event in eventEntities {
-                if let imageName = event.imageName {
-                    print("Image name: \(imageName)")
-                } else {
-                    print("No image name available")
-                }
-            }
         }
         catch let error {
             print("Error fetching \(error)")
