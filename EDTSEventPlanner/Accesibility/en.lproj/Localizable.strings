@@ -27,6 +27,8 @@
 
 // MARK: ProfileView
 "title_profile_header" = "Profile";
+"label_user" = "User";
+"label_language" = "Language";
 "button_profile_logout" = "Logout";
 
 // MARK: CreateEventView
@@ -39,6 +41,7 @@
 "label_image" = "Image";
 "label_create_event_date" = "Selected date";
 "label_create_event_image" = "Select image";
+"label_create_event_warning" = "Make sure the fields with * are all filled!";
 "button_create_event_create" = "Save Event";
 
 // MARK: EventCardView

@@ -9,23 +9,35 @@ import Foundation
 import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
+    @Published var validAuthenticationInput:Bool = false
+    @Published var authenticationSuccess:Bool = true
+    @Published var errorMessage: String = ""
     
     
     func getCurrentUserEmail() -> String?{
         return Auth.auth().currentUser?.email
     }
     
+    func checkAuthenticationInput(email: String, password: String) {
+        if (password.isValidPassword() == true && email.isValidEmail() == true) {
+            validAuthenticationInput = true
+        }
+        else{
+            validAuthenticationInput = false
+        }
+    }
+    
     func registerEmailPassword(email: String, password: String, completion: @escaping (String) -> Void) {
-        var resultUID = ""
-        
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 print(error)
-                completion("")
+                self.errorMessage = error.localizedDescription
+                completion("Failure: \(error.localizedDescription)")
             }
             if let authResult = authResult {
                 let userID = String(authResult.user.uid)
                 print(userID)
+                self.errorMessage = ""
                 completion(userID)
             }
         }
@@ -35,12 +47,14 @@ class AuthViewModel: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 print(error)
-                completion("")
+                self.errorMessage = error.localizedDescription
+                completion("Failure: \(error.localizedDescription)")
             }
             
             if let authResult = authResult {
                 let userID = String(authResult.user.uid)
                 print(userID)
+                self.errorMessage = ""
                 completion(userID)
             }
         }

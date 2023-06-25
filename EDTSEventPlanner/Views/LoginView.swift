@@ -16,6 +16,7 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State var isNavigate: Bool = false
+    @State var isSecured: Bool = true
     
     var body: some View {
         NavigationView {
@@ -25,21 +26,7 @@ struct LoginView: View {
                         HStack{
                             Spacer()
                             
-                            Button(action: {
-                                // Change the language
-                                language.toggleLanguage()
-                            }) {
-                                Text(language.getLanguage().rawValue)
-                                    .padding()
-                                    .fontWeight(.bold)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(Color.customButton)
-                                            .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
-                                    )
-                                    .foregroundColor(Color.customPrimary)
-                            }
-                            .padding()
+                            ChangeLanguageView()
                         }
                         Spacer()
                     }
@@ -64,6 +51,9 @@ struct LoginView: View {
                             HStack{
                                 Image(systemName: "mail")
                                 TextField("label_email".localized(language.getLanguage()), text: $email)
+                                    .onChange(of: email) { newEmail in
+                                            authViewModel.checkAuthenticationInput(email: newEmail, password: password)
+                                    }
                                 
                                 Spacer()
                                 
@@ -71,6 +61,7 @@ struct LoginView: View {
                                     Image(systemName:email.isValidEmail() ? "checkmark" : "xmark")
                                         .fontWeight(.bold)
                                         .foregroundColor(email.isValidEmail() ? .green : .red)
+                                    
                                 }
                             }
                             .padding()
@@ -97,8 +88,24 @@ struct LoginView: View {
                             }
                             .padding(.horizontal)
                             HStack{
-                                Image(systemName: "key")
-                                SecureField("label_password".localized(language.getLanguage()), text: $password)
+                                Button {
+                                    isSecured.toggle()
+                                } label: {
+                                    Image(systemName: isSecured ? "eye.slash"  : "eye")
+                                        .foregroundColor(Color.customDarkBackground)
+                                }
+                                if(isSecured == true){
+                                    SecureField("label_password".localized(language.getLanguage()), text: $password)
+                                        .onChange(of: password) { newPassword in
+                                                authViewModel.checkAuthenticationInput(email: email, password: newPassword)
+                                        }
+                                }
+                                else{
+                                    TextField("label_password".localized(language.getLanguage()), text: $password)
+                                        .onChange(of: password) { newPassword in
+                                                authViewModel.checkAuthenticationInput(email: email, password: newPassword)
+                                        }
+                                }
                                 
                                 Spacer()
                                 
@@ -141,36 +148,43 @@ struct LoginView: View {
                         
                         Spacer()
                         
+                        if (!authViewModel.authenticationSuccess) {
+                            Text(authViewModel.errorMessage)
+                                .foregroundColor(Color.customDisabledButton)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }
+                        
                         Button {
                             authViewModel.login(email: email, password: password) { userID in
                                 DispatchQueue.main.async {
-                                    if !userID.isEmpty {
+                                    if !userID.contains("Failure") {
                                         self.userID = userID
+                                        authViewModel.authenticationSuccess = true
                                         isNavigate = true
-                                        print("Moving page")
+                                    }
+                                    else{
+                                        authViewModel.authenticationSuccess = false
                                     }
                                 }
                             }
 
                         } label: {
                             Text("button_login_redirect_home".localized(language.getLanguage()))
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.customPrimary)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color.customButton)
+                                        .foregroundColor(authViewModel.validAuthenticationInput ? Color.customButton : Color.customDisabledButton)
                                         .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
                                 )
                                 .padding(.horizontal)
                         }
+                        .disabled(!authViewModel.validAuthenticationInput)
                         
                     }
-                } .onChange(of: language.language) { _ in
-                    // Reload the view when the language changes
-                    // You can add any necessary logic here to handle view refresh
-                    currentViewShowing = currentViewShowing // Force a refresh by updating the binding value
                 }.background(Color.customBackground)
             }
             NavigationLink(destination: HomeView(),

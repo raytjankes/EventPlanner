@@ -16,6 +16,7 @@ struct RegisterView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State var isNavigate: Bool = false
+    @State var isSecured: Bool = true
 
     var body: some View {
         NavigationView {
@@ -43,6 +44,9 @@ struct RegisterView: View {
                             HStack{
                                 Image(systemName: "mail")
                                 TextField("label_email".localized(language.getLanguage()), text: $email)
+                                    .onChange(of: email) { newEmail in
+                                            authViewModel.checkAuthenticationInput(email: newEmail, password: password)
+                                    }
                                 
                                 Spacer()
                                 
@@ -68,16 +72,32 @@ struct RegisterView: View {
                         Spacer().frame(height: geometry.size.height / 30)
                         VStack{
                             HStack{
-                                Text("label_password".localized(language.getLanguage()) + ":")
+                                Text("label_password".localized(language.getLanguage())+":")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.customPrimary)
                                 Spacer()
-                                
+
                             }
                             .padding(.horizontal)
                             HStack{
-                                Image(systemName: "key")
-                                SecureField("label_password".localized(language.getLanguage()), text: $password)
+                                Button {
+                                    isSecured.toggle()
+                                } label: {
+                                    Image(systemName: isSecured ? "eye.slash"  : "eye")
+                                        .foregroundColor(Color.customDarkBackground)
+                                }
+                                if(isSecured == true){
+                                    SecureField("label_password".localized(language.getLanguage()), text: $password)
+                                        .onChange(of: password) { newPassword in
+                                                authViewModel.checkAuthenticationInput(email: email, password: newPassword)
+                                        }
+                                }
+                                else{
+                                    TextField("label_password".localized(language.getLanguage()), text: $password)
+                                        .onChange(of: password) { newPassword in
+                                                authViewModel.checkAuthenticationInput(email: email, password: newPassword)
+                                        }
+                                }
                                 
                                 Spacer()
                                 
@@ -121,13 +141,23 @@ struct RegisterView: View {
                         
                         Spacer()
                         
+                        if (!authViewModel.authenticationSuccess) {
+                            Text(authViewModel.errorMessage)
+                                .foregroundColor(Color.customDisabledButton)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }
+                        
                         Button {
                             authViewModel.registerEmailPassword(email: email, password: password) { userID in
                                 DispatchQueue.main.async {
-                                    if !userID.isEmpty {
+                                    if !userID.contains("Failure") {
                                         self.userID = userID
+                                        authViewModel.authenticationSuccess = true
                                         isNavigate = true
-                                        print("Moving page")
+                                    }
+                                    else{
+                                        authViewModel.authenticationSuccess = false
                                     }
                                 }
                             }
@@ -140,11 +170,11 @@ struct RegisterView: View {
                                 .padding()
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color.customButton)
+                                        .foregroundColor(authViewModel.validAuthenticationInput ? Color.customButton : Color.customDisabledButton)
                                         .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
                                 )
                                 .padding(.horizontal)
-                        }
+                        }.disabled(!authViewModel.validAuthenticationInput)
                         
                         NavigationLink(destination: HomeView(),
                                        isActive: self.$isNavigate, label: { EmptyView() })
@@ -158,17 +188,8 @@ struct RegisterView: View {
                                 // Change the language
                                 language.toggleLanguage()
                             }) {
-                                Text(language.getLanguage().rawValue)
-                                    .padding()
-                                    .fontWeight(.bold)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(Color.customButton)
-                                            .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
-                                    )
-                                    .foregroundColor(Color.customPrimary)
+                                ChangeLanguageView()
                             }
-                            .padding()
                         }
                         Spacer()
                     }

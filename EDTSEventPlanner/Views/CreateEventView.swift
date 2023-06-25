@@ -139,6 +139,10 @@ struct CreateEventView: View {
                             )
                         }.listStyle(.insetGrouped)
 
+                        Text("label_create_event_warning".localized(language.getLanguage()))
+                            .foregroundColor(Color.customSecondary)
+                            .padding(0)
+                            .font(.system(size: 15))
                         
                         Button {
                             isNavigate = true
@@ -153,11 +157,11 @@ struct CreateEventView: View {
                                 .padding()
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .foregroundColor(Color.customButton)
+                                        .foregroundColor(!(eventName.isEmpty || eventLocation.isEmpty || eventOrganizer.isEmpty) ? Color.customButton : Color.customDisabledButton)
                                         .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
                                 )
                                 .padding(.horizontal)
-                        }
+                        }.disabled(eventName.isEmpty || eventLocation.isEmpty || eventOrganizer.isEmpty)
                         
                         Spacer()
                         

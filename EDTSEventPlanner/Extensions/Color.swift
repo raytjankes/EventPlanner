@@ -15,6 +15,7 @@ extension Color {
     static let customBackground = Color(hex: "0x152852")
     static let customDarkBackground = Color(hex: "0x060D21")
     static let customButton = Color(hex: "0xE71D4D")
+    static let customDisabledButton = Color(hex: "0x986B77")
     
     
     // Function to convert hexcode to Color

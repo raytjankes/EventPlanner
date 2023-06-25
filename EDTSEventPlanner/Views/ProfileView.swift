@@ -49,28 +49,91 @@ struct ProfileView: View {
                             .foregroundColor(Color.customSecondary)
                         
                         Spacer().frame(height: geometry.size.height / 25)
-                        
-                        Text(authViewModel.getCurrentUserEmail() ?? "Stranger")
-                            .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.customDarkBackground)
-                        
-                        Spacer().frame(height: geometry.size.height / 10)
-                        Button(action: {
-                            // Change the language
-                            language.toggleLanguage()
-                        }) {
-                            Text(language.getLanguage().rawValue)
+                        VStack{
+                            
+                            Divider()
+                                .background(Color.customSecondary.opacity(0.5))
+                                .padding(.horizontal)
+                            
+                            HStack{
+                                Text("label_user".localized(language.getLanguage()))
+                                    .padding()
+                                    .font(.system(size: 20))
+                                
+                                Spacer()
+                                
+                                Text(authViewModel.getCurrentUserEmail() ?? "Stranger")
+                                    .font(.system(size: 20))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.customDarkBackground)
+                                    .padding()
+                            }
+                            
+                            Divider()
+                                .background(Color.customSecondary.opacity(0.5))
+                                .padding(.horizontal)
+
+                            HStack{
+                                Text("label_language".localized(language.getLanguage()))
+                                    .padding()
+                                    .font(.system(size: 20))
+                                
+                                Spacer()
+                                
+                                HStack{
+                                    Button(action: {
+                                        // Change the language
+                                        language.toggleLanguage()
+                                    }) {
+                                        if(language.getLanguage().rawValue == "id"){
+                                            Image("indonesia-flag")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(maxWidth: 25)
+                                                .background(
+                                                    Circle()
+                                                        .stroke(lineWidth: 5)
+                                                        .foregroundColor(Color.customDarkBackground.opacity(0.5))
+                                                )
+                                            Text("IND")
+                                                .font(.system(size: 15))
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.customDarkBackground)
+                                        }
+                                        else{
+                                            Image("us-flag")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(maxWidth: 25)
+                                                .background(
+                                                    Circle()
+                                                        .stroke(lineWidth: 5)
+                                                        .foregroundColor(Color.customDarkBackground.opacity(0.5))
+                                                )
+                                            Text("ENG")
+                                                .font(.system(size: 15))
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.customDarkBackground)
+                                        }
+                                    }
+                                    
+                                    
+                                }
                                 .padding()
-                                .fontWeight(.bold)
                                 .background(
                                     RoundedRectangle(cornerRadius: 5)
                                         .foregroundColor(Color.customButton)
-                                        .shadow(color: Color.customDarkBackground, radius: 3, x: 2, y: 2)
                                 )
-                                .foregroundColor(Color.customPrimary)
+                                .padding(.horizontal)
+                                
+                                
+                            }
+                            Divider()
+                                .background(Color.customSecondary.opacity(0.5))
+                                .padding(.horizontal)
+                            
+                            Spacer().frame(height: geometry.size.height / 10)
                         }
-                        Spacer().frame(height: geometry.size.height / 10)
                         HStack{
                             Spacer()
                             Button {
@@ -92,7 +155,7 @@ struct ProfileView: View {
                                     )
                                     .padding(.horizontal)
                             }
-
+                            
                             Spacer()
                         }
                         

@@ -34,6 +34,7 @@
 		7DBF0B712A469D1400512840 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B702A469D1400512840 /* Language.swift */; };
 		7DBF0B732A46CD5F00512840 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B722A46CD5F00512840 /* Color.swift */; };
 		7DBF0B772A4744A300512840 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B762A4744A300512840 /* AuthViewModel.swift */; };
+		7DBF0B792A47E62E00512840 /* ChangeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF0B782A47E62E00512840 /* ChangeLanguageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		7DBF0B702A469D1400512840 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		7DBF0B722A46CD5F00512840 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7DBF0B762A4744A300512840 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7DBF0B782A47E62E00512840 /* ChangeLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				7D7919872A4559460080FA7C /* EventCardView.swift */,
 				7D79198E2A4564B20080FA7C /* ImagePickerView.swift */,
 				7DABCDFB2A45ADAB001D58ED /* PullDownView.swift */,
+				7DBF0B782A47E62E00512840 /* ChangeLanguageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				7DBF0B6E2A46969200512840 /* LanguageViewModel.swift in Sources */,
 				7D79196B2A4538420080FA7C /* LoginView.swift in Sources */,
 				7D7919862A4558170080FA7C /* EventViewModel.swift in Sources */,
+				7DBF0B792A47E62E00512840 /* ChangeLanguageView.swift in Sources */,
 				7D79198F2A4564B20080FA7C /* ImagePickerView.swift in Sources */,
 				7D7919702A45400F0080FA7C /* RegisterView.swift in Sources */,
 				7DBF0B712A469D1400512840 /* Language.swift in Sources */,

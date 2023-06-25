@@ -26,6 +26,8 @@
 
 // MARK: ProfileView
 "title_profile_header" = "Profil";
+"label_user" = "Pengguna";
+"label_language" = "Bahasa";
 "button_profile_logout" = "Keluar Akun";
 
 // MARK: CreateEventView
@@ -38,6 +40,7 @@
 "label_image" = "Gambar";
 "label_create_event_date" = "Tanggal terpilih";
 "label_create_event_image" = "Pilih gambar";
+"label_create_event_warning" = "Pastikan semua teks dengan * diisi!";
 "button_create_event_create" = "Simpan Rencana";
 
 // MARK: EventCardView

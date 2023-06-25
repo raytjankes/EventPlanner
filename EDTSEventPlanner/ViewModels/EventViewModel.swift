@@ -54,13 +54,14 @@ class EventViewModel: ObservableObject {
         print("Start adding")
         
         var imageName: String?
-            
+        
+        // Save image
         if let image = image {
             guard let imageData = image.jpegData(compressionQuality: 0.8) else {
                 return
             }
             
-            let imageFileName = UUID().uuidString + ".jpg" // Add file extension
+            let imageFileName = UUID().uuidString + ".jpg" // Set file extension
             let imagePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageFileName)
             
             do {
@@ -70,8 +71,6 @@ class EventViewModel: ObservableObject {
                 print("Failed to save image: \(error)")
             }
         }
-            
-        
         
         let context = container.viewContext
         
@@ -97,8 +96,8 @@ class EventViewModel: ObservableObject {
     }
 
     func deleteEvent(_ event: EventEntity) {
+        
        let context = container.viewContext
-
        context.delete(event)
 
        do {
